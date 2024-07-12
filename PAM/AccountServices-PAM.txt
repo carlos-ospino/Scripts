@@ -1,0 +1,61 @@
+import-module activedirectory 
+
+$sp = ConvertTo-SecureString "Password01" –asplaintext –force 
+
+New-ADUser –SamAccountName MIMMA –name MIMMA 
+
+Set-ADAccountPassword –identity MIMMA –NewPassword $sp 
+
+Set-ADUser –identity MIMMA –Enabled 1 –PasswordNeverExpires 1 
+
+New-ADUser –SamAccountName MIMMonitor –name MIMMonitor -DisplayName MIMMonitor 
+
+Set-ADAccountPassword –identity MIMMonitor –NewPassword $sp 
+
+Set-ADUser –identity MIMMonitor –Enabled 1 –PasswordNeverExpires 1 
+
+New-ADUser –SamAccountName MIMComponent –name MIMComponent -DisplayName MIMComponent 
+
+Set-ADAccountPassword –identity MIMComponent –NewPassword $sp 
+
+Set-ADUser –identity MIMComponent –Enabled 1 –PasswordNeverExpires 1 
+
+New-ADUser –SamAccountName MIMSync –name MIMSync 
+
+Set-ADAccountPassword –identity MIMSync –NewPassword $sp 
+
+Set-ADUser –identity MIMSync –Enabled 1 –PasswordNeverExpires 1 
+
+New-ADUser –SamAccountName MIMService –name MIMService 
+
+Set-ADAccountPassword –identity MIMService –NewPassword $sp 
+
+Set-ADUser –identity MIMService –Enabled 1 –PasswordNeverExpires 1 
+
+New-ADUser –SamAccountName SharePoint –name SharePoint 
+
+Set-ADAccountPassword –identity SharePoint –NewPassword $sp 
+
+Set-ADUser –identity SharePoint –Enabled 1 –PasswordNeverExpires 1 
+
+New-ADUser –SamAccountName SqlServer –name SqlServer 
+
+Set-ADAccountPassword –identity SqlServer –NewPassword $sp 
+
+Set-ADUser –identity SqlServer –Enabled 1 –PasswordNeverExpires 1 
+
+New-ADUser –SamAccountName BackupAdmin –name BackupAdmin 
+
+Set-ADAccountPassword –identity BackupAdmin –NewPassword $sp 
+
+Set-ADUser –identity BackupAdmin –Enabled 1 -PasswordNeverExpires 1 
+
+New-ADUser -SamAccountName MIMAdmin -name MIMAdmin 
+
+Set-ADAccountPassword –identity MIMAdmin  -NewPassword $sp 
+
+Set-ADUser -identity MIMAdmin -Enabled 1 -PasswordNeverExpires 1 
+
+Add-ADGroupMember "Domain Admins" SharePoint 
+
+Add-ADGroupMember "Domain Admins" MIMService

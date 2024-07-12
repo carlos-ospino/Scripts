@@ -1,0 +1,16 @@
+
+dsacls.exe "DC=bips,DC=local" /I:S /G "bips\ad.connect:WP;mS-DS-ConsistencyGUID;user" "bips\ad.connect:WP;msDS-KeyCredentialLink;user" "bips\ad.connect:WP;msDS-KeyCredentialLink;group"
+
+
+dsacls.exe "DC=bips,DC=local" /G "bips\ad.connect:CA;Replicating Directory Changes;" "bips\ad.connect:CA;Replicating Directory Changes All;" 
+
+dsacls.exe "DC=bips,DC=local" /I:S /G "bips\ad.connect:CA;Reset Password;user" "bips\ad.connect:CA;Change Password;user" "bips\ad.connect:CA;Unexpire Password;user" "bips\ad.connect:WP;lockoutTime;user" "bips\ad.connect:WP;pwdLastSet;user"
+
+dsacls.exe "DC=bips,DC=local" /I:S /G "bips\ad.connect:CA;Reset Password;user" "bips\ad.connect:CA;Change Password;user" "bips\ad.connect:WP;lockoutTime;user" "bips\ad.connect:WP;pwdLastSet;user"
+
+dsacls.exe "DC=bips,DC=local" /I:S /G "bips\ad.connect:WP;proxyAddresses;user" "bips\ad.connect:WP;msExchUserHoldPolicies;user" "bips\ad.connect:WP;msExchBlockedSendersHash;user" "bips\ad.connect:WP;msExchSafeRecipientsHash;user" "bips\ad.connect:WP;msExchUCVoiceMailSettings;user" "bips\ad.connect:WP;publicDelegates;user" "bips\ad.connect:WP;msDS-ExternalDirectoryObjectId;user"
+
+dsacls.exe "DC=bips,DC=local" /I:S /G "bips\ad.connect:WP;msDS-KeyCredentialLink;user"
+
+
+.\AadminaadclocalPermissions.ps1 -user cuentadeservicio -PasswordHashSync -PasswordWriteBack -ExchangeHybridWriteBack -msDSConsistencyGuid -UpdateAdminSDHolder 

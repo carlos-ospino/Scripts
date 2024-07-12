@@ -1,0 +1,16 @@
+
+dsacls.exe "DC=RAMAJUDICIAL,DC=local" /I:S /G "RAMAJUDICIAL\entracon-sa:WP;mS-DS-ConsistencyGUID;user" "RAMAJUDICIAL\entracon-sa:WP;msDS-KeyCredentialLink;user" "RAMAJUDICIAL\entracon-sa:WP;msDS-KeyCredentialLink;group"
+
+
+dsacls.exe "DC=RAMAJUDICIAL,DC=local" /G "RAMAJUDICIAL\entracon-sa:CA;Replicating Directory Changes;" "RAMAJUDICIAL\entracon-sa:CA;Replicating Directory Changes All;" 
+
+dsacls.exe "DC=RAMAJUDICIAL,DC=local" /I:S /G "RAMAJUDICIAL\entracon-sa:CA;Reset Password;user" "RAMAJUDICIAL\entracon-sa:CA;Change Password;user" "RAMAJUDICIAL\entracon-sa:CA;Unexpire Password;user" "RAMAJUDICIAL\entracon-sa:WP;lockoutTime;user" "RAMAJUDICIAL\entracon-sa:WP;pwdLastSet;user"
+
+dsacls.exe "DC=RAMAJUDICIAL,DC=local" /I:S /G "RAMAJUDICIAL\entracon-sa:CA;Reset Password;user" "RAMAJUDICIAL\entracon-sa:CA;Change Password;user" "RAMAJUDICIAL\entracon-sa:WP;lockoutTime;user" "RAMAJUDICIAL\entracon-sa:WP;pwdLastSet;user"
+
+dsacls.exe "DC=RAMAJUDICIAL,DC=local" /I:S /G "RAMAJUDICIAL\entracon-sa:WP;proxyAddresses;user" "RAMAJUDICIAL\entracon-sa:WP;msExchUserHoldPolicies;user" "RAMAJUDICIAL\entracon-sa:WP;msExchBlockedSendersHash;user" "RAMAJUDICIAL\entracon-sa:WP;msExchSafeRecipientsHash;user" "RAMAJUDICIAL\entracon-sa:WP;msExchUCVoiceMailSettings;user" "RAMAJUDICIAL\entracon-sa:WP;publicDelegates;user" "RAMAJUDICIAL\entracon-sa:WP;msDS-ExternalDirectoryObjectId;user"
+
+dsacls.exe "DC=RAMAJUDICIAL,DC=local" /I:S /G "RAMAJUDICIAL\entracon-sa:WP;msDS-KeyCredentialLink;user"
+
+
+.\AadminaadclocalPermissions.ps1 -user cuentadeservicio -PasswordHashSync -PasswordWriteBack -ExchangeHybridWriteBack -msDSConsistencyGuid -UpdateAdminSDHolder 

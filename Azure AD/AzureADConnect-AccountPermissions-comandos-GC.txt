@@ -1,0 +1,15 @@
+
+dsacls.exe "DC=godoycordoba,DC=local" /I:S /G "godoycordoba\entra-sa:WP;mS-DS-ConsistencyGUID;user" "godoycordoba\entra-sa:WP;msDS-KeyCredentialLink;user" "godoycordoba\entra-sa:WP;msDS-KeyCredentialLink;group"
+
+
+dsacls.exe "DC=godoycordoba,DC=local" /G "godoycordoba\entra-sa:CA;Replicating Directory Changes;" "godoycordoba\entra-sa:CA;Replicating Directory Changes All;" 
+
+dsacls.exe "DC=godoycordoba,DC=local" /I:S /G "godoycordoba\entra-sa:CA;Reset Password;user" "godoycordoba\entra-sa:CA;Change Password;user" "godoycordoba\entra-sa:CA;Unexpire Password;user" "godoycordoba\entra-sa:WP;lockoutTime;user" "godoycordoba\entra-sa:WP;pwdLastSet;user"
+
+dsacls.exe "DC=godoycordoba,DC=local" /I:S /G "godoycordoba\entra-sa:CA;Reset Password;user" "godoycordoba\entra-sa:CA;Change Password;user" "godoycordoba\entra-sa:WP;lockoutTime;user" "godoycordoba\entra-sa:WP;pwdLastSet;user"
+
+dsacls.exe "DC=godoycordoba,DC=local" /I:S /G "godoycordoba\entra-sa:WP;proxyAddresses;user" "godoycordoba\entra-sa:WP;msExchUserHoldPolicies;user" "godoycordoba\entra-sa:WP;msExchBlockedSendersHash;user" "godoycordoba\entra-sa:WP;msExchSafeRecipientsHash;user" "godoycordoba\entra-sa:WP;msExchUCVoiceMailSettings;user" "godoycordoba\entra-sa:WP;publicDelegates;user" "godoycordoba\entra-sa:WP;msDS-ExternalDirectoryObjectId;user"
+
+dsacls.exe "DC=godoycordoba,DC=local" /I:S /G "godoycordoba\entra-sa:WP;msDS-KeyCredentialLink;user"
+
+

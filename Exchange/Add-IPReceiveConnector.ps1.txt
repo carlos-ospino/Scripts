@@ -1,0 +1,31 @@
+# Fill in the path of your csv file and receive connector
+$Csv = "C:\temp\RelayIPsExpression.csv"
+$RC = "EX02-2016\SMTP Relay"
+
+# Import IP addresses from CSV file
+$IPs = Import-Csv $Csv
+
+# Get receive connector
+$RCon = Get-ReceiveConnector $RC
+
+# Get receive connector remote IP addresses
+$RemoteIPRanges = $RCon.RemoteIPRanges
+
+# Loop through each IP address
+foreach ($IP in $IPs) {
+    $IPEx = $IP.Expression
+
+    # Check if IP addres already exist
+    if ($RemoteIPRanges -contains $IPEx) {
+        Write-Host "IP address $($IPEx) already exist in receive connector $($RC)" -ForegroundColor Red
+    }
+    
+    # If IP address not exist than add IP address
+    else {
+        $RemoteIPRanges += $IPEx
+
+        # Remove the -WhatIf parameter after you tested and are sure to add the remote IP addresses
+        Set-ReceiveConnector $RC -RemoteIPRanges $RemoteIPRanges -WhatIf
+        Write-Host "IP address $($IPEx) added to receive connector $($RC)" -ForegroundColor Green
+    }
+}

@@ -1,0 +1,30 @@
+$UserToRemove = "user@domain.com"
+ 
+Try {
+    #Connect to Azure AD
+    Connect-AzureAD | Out-Null
+ 
+    #Get the user
+    $User = Get-AzureADuser -ObjectId $UserToRemove
+ 
+    #Get All Security Groups of the user
+    $GroupMemberships = Get-AzureADUserMembership -ObjectId $User.ObjectId -All $true | Where {$_.ObjectType -eq "Group" -and $_.SecurityEnabled -eq $true -and $_.MailEnabled -eq $false}
+ 
+    #Loop through each security group
+    ForEach($Group in $GroupMemberships)
+    {
+        Try {
+            Remove-AzureADGroupMember -ObjectId $Group.ObjectID -MemberId $User.ObjectId -erroraction Stop
+            Write-host "Removed user from Group: $($Group.DisplayName)"
+        }
+        catch {
+            #Remove-DistributionGroupMember -identity $group.mail -member $userid -BypassSecurityGroupManagerCheck # -Confirm:$false
+            write-host -f Red "Error:" $_.Exception.Message
+        }
+    }
+}
+Catch {
+    write-host -f Red "Error:" $_.Exception.Message
+
+
+#Read more: https://www.sharepointdiary.com/2021/02/remove-user-from-all-security-groups-using-powershell.html#ixzz7ytAKSUCy
